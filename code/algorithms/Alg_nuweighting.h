@@ -216,7 +216,7 @@ public:
     void print_best_solution();
     void free_memory();
     bool parse_parameters(int argc, char **argv);
-    void get_init_solution(string& filename, vector<int>& binary_array);
+    void get_init_solution(const string& filename);
 };
 
 inline NUWEIGHTING::NUWEIGHTING() {}
@@ -233,15 +233,19 @@ inline bool NUWEIGHTING::parse_parameters(int argc, char **argv)
                 return false;
             init_soln_file = argv[i];
             cout << "c The file containing the initial assignment for NuWLS: " << init_soln_file << endl;
-            get_init_solution(init_soln_file, binary_array);
+            get_init_solution(init_soln_file);
         }
     }
     
     return true;
 }
 
-inline void NUWEIGHTING::get_init_solution(string& filename, vector<int>& binary_array)
+inline void NUWEIGHTING::get_init_solution(const string& filename)
 {
+    if(filename.empty()) {
+        return;
+    }
+    
     ifstream file(filename);
     if (!file.is_open()) {
         cerr << "c Unable to open file: " << filename << endl;

@@ -1,5 +1,6 @@
 #pragma once
 #include <chrono>
+#include <string>
 
 using NSPACE::vec;
 using NSPACE::lbool;
@@ -51,7 +52,12 @@ public:
    void SetMrsBeaverPolosatRegulateStrat(int p) { mrsBeaverPolosatRegulateStrat = p; }
    void SetMrsBeaverApplySizeThrDuringInitialPolosat(int p) { mrsBeaverApplySizeThrDuringInitialPolosat = p; }
    void SetPrintEveryModel(int p) { printEveryModel = p; }
-   
+   void SetInitSolutionFile(const char* f) {
+      if(f) {
+         initSolutionFile = f;
+      }
+   }
+
    bool GetPolConservative() const { return polIsConservative; }
    bool GetConservativeAllVars() const { return conservativeUseAllVars; } 
    bool GetPolOptimistic() const { return polIsOptimistic; }
@@ -95,7 +101,8 @@ public:
    int GetMrsBeaverApplySizeThrDuringInitialPolosat() const { return mrsBeaverApplySizeThrDuringInitialPolosat; }
    int GetPrintEveryModel() const { return printEveryModel; }
    int GetRandBump() const;
-   
+   const char* GetInitSolutionFile() const { return initSolutionFile.c_str(); }
+
    vec<bool>& TargetIsVarTarget() { return isVarTarget; }
    bool& SkipFillingSolverPolarity() { return skipFillingSolverPolarity; }
    
@@ -159,7 +166,9 @@ private:
    int msVerbosity;
    
    vec<bool> isVarTarget;
-   bool skipFillingSolverPolarity;   
+   bool skipFillingSolverPolarity;  
+
+   std::string initSolutionFile;
 };
 
 

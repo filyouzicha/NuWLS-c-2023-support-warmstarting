@@ -258,9 +258,9 @@ int main(int argc, char **argv)
     IntOption msVerbosity("TTOpenWboInc", "ms_verbosity", "Mutation sampling: verbosity (0: not verbose at all; only print when interrupted or finished; 1: print o and timeo messages; 2: print some info about the alg. progress; 3: debugging)\n", 0, IntRange(0, 3));
 
     //DoubleOption h_inc("h inc", "h_inc", "test\n", 1.);
-    //StringOption Init_file("InitFile", "init_file", "init solution of NuWLS\n");
+    StringOption initSolnFile("InitFile", "init_file", "init solution of NuWLS\n");
 
-    //parseOptions(argc, argv, true);
+    parseOptions(argc, argv, true);
 
     if ((int)num_tests)
     {
@@ -322,6 +322,7 @@ int main(int argc, char **argv)
     Torc::Instance()->SetMrsBeaverApplySizeThrDuringInitialPolosat(mrsBeaverApplySizeThrDuringInitialPolosat);
     Torc::Instance()->SetPrintEveryModel(printEveryModel);
     Torc::Instance()->SetMsVerbosity(msVerbosity);
+    Torc::Instance()->SetInitSolutionFile(initSolnFile);
     double initial_time = cpuTime();
     MaxSAT *S = NULL;
 

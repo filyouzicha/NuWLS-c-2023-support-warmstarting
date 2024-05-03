@@ -281,7 +281,7 @@ lbool MaxSAT::polosat(int argc, char **argv, Solver *solver, vec<Lit> &assumptio
     cout << "c changing to NuWLS solver!!" << endl;
 
     nuweighting_solver.settings();
-    nuweighting_solver.parse_parameters(argc, argv);
+    nuweighting_solver.get_init_solution(Torc::Instance()->GetInitSolutionFile());
 
     vector<int> init_solu(nuweighting_nvars + 1);
     if (0 != nuweighting_solver.binary_array.size())
